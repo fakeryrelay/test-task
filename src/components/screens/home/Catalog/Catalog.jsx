@@ -5,6 +5,7 @@ import { CatalogNavSort } from './CatalogNav/CatalogNavSort'
 import { CatalogShop } from './CatalogShop/CatalogShop';
 import { useEffect, useState } from 'react';
 import { CatalogView } from './CatalogView/CatalogView';
+import { sortByName } from './../../../../utils/catalogSort';
 
 const filterBySearch = (products, searchValue) => {
   return products.filter(({name, category}) => {
@@ -31,7 +32,7 @@ export const Catalog = ({}) => {
   const [searchValue, setSearchValue] = useState('')
   const [amountProductsToShow, setAmountProductsToShow] = useState(5)
   const [activeSortFunc, setActiveSortFunc] = useState({
-    sortBy: el => el,
+    sortBy: sortByName,
     toBottom: true
   })
 

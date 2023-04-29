@@ -4,8 +4,7 @@ import { FaSortAmountDownAlt, FaSortAmountUp } from "react-icons/fa";
 
 export const SortButton = ({children, sortFunc, activeSortFunc, setActiveSortFunc}) => {
   const isActive = sortFunc === activeSortFunc.sortBy
-
-  
+  if (activeSortFunc)
 
   return (
     <button 
