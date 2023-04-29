@@ -13,7 +13,16 @@
   margin: 0 auto;
   min-height: 100vh;
 
+  position: relative;
+
   @media (max-width: 525px) {
     padding: 50px 15px 15px;
   }
+}
+
+.select {
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  z-index: 10;
 }

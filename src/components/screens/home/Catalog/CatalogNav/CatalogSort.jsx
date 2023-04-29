@@ -1,50 +1,45 @@
 import styles from './CatalogNav.module.scss'
 import { SortButton } from './../../../../UI/SortButton/SortButton';
 
-import { sortByName, sortByViews, sortByStartDate, sortByEndDate } from './../../../../../utils/catalogSort';
+import { sortFunctions } from './../../../../../utils/catalogSort';
+import { useSelector } from 'react-redux';
+import { catalogLocale } from './../catalog.locale';
 
 export const CatalogSort = ({activeSortFunc, setActiveSortFunc}) => {
-
+  const language = useSelector(state => state.view.language)
+  
   return (
     <div className={styles.sort}>
       <ul >
         <li>
-          <h3>Сортировать:</h3>
+          <h3>{catalogLocale[language].sortTitle}</h3>
         </li>
         <li>
           <SortButton
-            sortFunc={sortByName}
-            activeSortFunc={activeSortFunc}
-            setActiveSortFunc={setActiveSortFunc}
+            sortFunc={sortFunctions.sortByName}
           >
-            по названию
+            {catalogLocale[language].sortByName}
           </SortButton>
         </li>
         <li>
           <SortButton
-            sortFunc={sortByViews}
-            activeSortFunc={activeSortFunc}
-            setActiveSortFunc={setActiveSortFunc}
+            sortFunc={sortFunctions.sortByViews}
           >
-            по просмотрам
+            {catalogLocale[language].sortByViews}
           </SortButton>
         </li>
         <li>
           <SortButton
-            sortFunc={sortByStartDate}
-            activeSortFunc={activeSortFunc}
-            setActiveSortFunc={setActiveSortFunc}
+            sortFunc={sortFunctions.sortByStartDate}
           >
-            по дате начала
+            {catalogLocale[language].sortByStartDate}
           </SortButton>
         </li>
         <li>
           <SortButton
-            sortFunc={sortByEndDate}
-            activeSortFunc={activeSortFunc}
-            setActiveSortFunc={setActiveSortFunc}
+            sortFunc={sortFunctions.sortByEndDate}
           >
-            по дате окончания
+            {catalogLocale[language].sortByEndDate}
           </SortButton>
         </li>
       </ul>

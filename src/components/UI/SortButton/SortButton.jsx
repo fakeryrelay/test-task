@@ -1,27 +1,17 @@
 import styles from './SortButton.module.scss'
 import { FaSortAmountDownAlt, FaSortAmountUp } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
 
 
-export const SortButton = ({children, sortFunc, activeSortFunc, setActiveSortFunc}) => {
+export const SortButton = ({children, sortFunc}) => {
+  const dispatch = useDispatch()
+  const activeSortFunc = useSelector(state => state.catalog.sortMethod)
   const isActive = sortFunc === activeSortFunc.sortBy
-  if (activeSortFunc)
 
   return (
     <button 
       className={styles.button}
-      onClick={() => setActiveSortFunc(prevState => {
-        if (prevState.sortBy === sortFunc) {
-          console.log(prevState)
-          return {
-            ...prevState,
-            toBottom: !prevState.toBottom
-          }
-        }
-        return {
-          sortBy: sortFunc,
-          toBottom: true
-        }
-      })}
+      onClick={() => dispatch({type: 'SORT_METHOD', func: sortFunc})}
     >
       {children}
       {isActive && (activeSortFunc.toBottom ? <FaSortAmountDownAlt /> : <FaSortAmountUp />)}

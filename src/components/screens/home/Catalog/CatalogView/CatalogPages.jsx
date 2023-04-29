@@ -3,15 +3,16 @@ import { PagesContainer } from './../../../../UI/PagesContainer/PagesContainer';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import cn from 'clsx'
 import { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-export const CatalogPages = ({page, setPage, maxPageNum}) => {
-  console.log(maxPageNum)
-
+export const CatalogPages = ({maxPageNum}) => {
+  const page = useSelector(state => state.catalog.page)
+  const dispatch = useDispatch()
   return (
     <div className={styles.nav}>
       <PagesContainer>
-        <button disabled={page <= 0} onClick={() => setPage(prev => prev - 1)}><FaChevronLeft /></button>
+        <button disabled={page <= 0} onClick={() => dispatch({type: 'PAGE_DOWN'})}><FaChevronLeft /></button>
       </PagesContainer>
 
       {page === 0 || page === 1
@@ -23,7 +24,7 @@ export const CatalogPages = ({page, setPage, maxPageNum}) => {
                   <PagesContainer>
                     <button 
                       className={cn(i === page && styles.active__button)}
-                      onClick={() => setPage(i)}
+                      onClick={() => dispatch({type: 'PAGE_BY_NUM', page: i})}
                     >{i+1}</button>
                   </PagesContainer>
                 }
@@ -38,7 +39,7 @@ export const CatalogPages = ({page, setPage, maxPageNum}) => {
                     <PagesContainer>
                       <button 
                         className={cn(i === 1 && styles.active__button)}
-                        onClick={() => setPage(prev => prev + i - 1)}
+                        onClick={() => dispatch({type: 'PAGE_BY_NUM', page: page + i - 1})}
                       >{page+i}</button>
                     </PagesContainer>
                   }
@@ -51,7 +52,7 @@ export const CatalogPages = ({page, setPage, maxPageNum}) => {
 
 
       <PagesContainer>
-        <button disabled={page + 1 >= maxPageNum} onClick={() => setPage(prev => prev + 1)}><FaChevronRight /></button>
+        <button disabled={page + 1 >= maxPageNum} onClick={() => dispatch({type: 'PAGE_UP'})}><FaChevronRight /></button>
       </PagesContainer>
     </div>
   )

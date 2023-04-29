@@ -3,8 +3,9 @@ import { CatalogNavSort } from './CatalogNav/CatalogNavSort'
 import { CatalogShop } from './CatalogShop/CatalogShop';
 import { useEffect, useState } from 'react';
 import { CatalogView } from './CatalogView/CatalogView';
-import { sortByName } from './../../../../utils/catalogSort';
 import { filterBySearch } from './../../../../utils/filterBySearch';
+import { useSelector } from 'react-redux';
+import { catalogLocale } from './catalog.locale.js';
 
 
 
@@ -16,43 +17,23 @@ const setShownItems = (products, amount, page, toBottom) => {
 }
 
 export const Catalog = ({}) => {
-  const [products, setProducts] = useState([])
-  const [page, setPage] = useState(0)
-  const [searchValue, setSearchValue] = useState('')
-  const [amountProductsToShow, setAmountProductsToShow] = useState(5)
-  const [activeSortFunc, setActiveSortFunc] = useState({
-    sortBy: sortByName,
-    toBottom: true
-  })
-
-  const cardItems = async() => {
-    const get = await fetch('https://files.rerotor.ru/rerotor/products.json')
-    const products = await get.json()
-    setProducts(products)
-  }
+  const products = useSelector(state => state.catalog.allProducts)
+  const page = useSelector(state => state.catalog.page) 
+  const searchValue = useSelector(state => state.catalog.searchValue) 
+  const amountProductsToShow = useSelector(state => state.catalog.amountOfItemsToShow) 
+  const activeSortFunc = useSelector(state => state.catalog.sortMethod)
+  const language = useSelector(state => state.view.language)
 
   const filteredProducts = activeSortFunc.sortBy(filterBySearch(products, searchValue), searchValue)
   const productsToShow = setShownItems(filteredProducts, amountProductsToShow, page, activeSortFunc.toBottom)
 
-  useEffect(() => {
-    cardItems()
-  }, [])
-
   return (
     <div>
-      <h1 className={styles.title}>Каталог товаров</h1>
+      <h1 className={styles.title}>{catalogLocale[language].catalogTitle}</h1>
 
-      <CatalogNavSort 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue} 
-        activeSortFunc={activeSortFunc} 
-        setActiveSortFunc={setActiveSortFunc}
-      />
+      <CatalogNavSort />
 
       <CatalogView
-        setAmountProductsToShow={setAmountProductsToShow} 
-        page={page} 
-        setPage={setPage}
         maxPageNum={Math.ceil(filteredProducts.length / amountProductsToShow)}
       />
 

@@ -36,3 +36,10 @@ export const sortByEndDate = (products = []) => {
     return dateA.getTime() - dateB.getTime()
   })
 }
+
+export const sortFunctions = {
+  sortByName: sortByName,
+  sortByViews: sortByViews,
+  sortByStartDate: sortByStartDate,
+  sortByEndDate: sortByEndDate
+}
