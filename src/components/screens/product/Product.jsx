@@ -10,7 +10,6 @@ export const Product = () => {
   const nav = useNavigate()
   const location = useLocation();
   const product = location.state?.product
-  console.log(product)
   
   return (
     <Layout backgroundColor="#EDF2F8">

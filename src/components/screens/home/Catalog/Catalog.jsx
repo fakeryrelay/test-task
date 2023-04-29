@@ -2,9 +2,9 @@
 
 import styles from './Catalog.module.scss'
 import { CatalogNavSort } from './CatalogNav/CatalogNavSort'
-import { CatalogPages } from './CatalogPages/CatalogPages';
 import { CatalogShop } from './CatalogShop/CatalogShop';
 import { useEffect, useState } from 'react';
+import { CatalogView } from './CatalogView/CatalogView';
 
 const filterBySearch = (products, searchValue) => {
   return products.filter(({name, category}) => {
@@ -29,7 +29,7 @@ export const Catalog = ({}) => {
   const [products, setProducts] = useState([])
   const [page, setPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
-  const [productsToShow, setProductsToShow] = useState(5)
+  const [amountProductsToShow, setAmountProductsToShow] = useState(5)
   const [activeSortFunc, setActiveSortFunc] = useState({
     sortBy: el => el,
     toBottom: true
@@ -40,6 +40,9 @@ export const Catalog = ({}) => {
     const products = await get.json()
     setProducts(products)
   }
+
+  const filteredProducts = activeSortFunc.sortBy(filterBySearch(products, searchValue), searchValue)
+  const productsToShow = setShownItems(filteredProducts, amountProductsToShow, page, activeSortFunc.toBottom)
 
   useEffect(() => {
     cardItems()
@@ -56,14 +59,15 @@ export const Catalog = ({}) => {
         setActiveSortFunc={setActiveSortFunc}
       />
 
-      <CatalogPages 
-        setProductsToShow={setProductsToShow} 
+      <CatalogView
+        setAmountProductsToShow={setAmountProductsToShow} 
         page={page} 
         setPage={setPage}
+        maxPageNum={Math.ceil(filteredProducts.length / amountProductsToShow)}
       />
 
       <CatalogShop 
-      products={setShownItems(activeSortFunc.sortBy(filterBySearch(products, searchValue), searchValue), productsToShow, page, activeSortFunc.toBottom)}
+      products={productsToShow}
       />
     </div>
   )
