@@ -1,0 +1,26 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 3px 5px 5px;
+
+  border: none;
+  background-color: transparent;
+
+  font-family: inherit;
+  color: #2A7BE4;
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: color .2s linear;
+
+  svg {
+    margin-left: 3px;
+  }
+
+  &:hover {
+    color: darken(#2A7BE4, 20%);
+  }
+}

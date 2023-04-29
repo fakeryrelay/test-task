@@ -1,0 +1,19 @@
+.page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1230px;
+  padding: 70px 15px;
+  margin: 0 auto;
+  min-height: 100vh;
+
+  @media (max-width: 525px) {
+    padding: 50px 15px 15px;
+  }
+}

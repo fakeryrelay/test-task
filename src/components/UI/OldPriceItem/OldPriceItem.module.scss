@@ -1,0 +1,58 @@
+.price {
+  display: flex;
+  justify-content: center;
+
+  font-weight: 700;
+  line-height: 1;
+
+  color: #94979C;
+
+  font-size: 35px;
+
+  position: relative;
+
+  @media (max-width: 1024px) {
+    font-size: 27px;
+  }
+  @media (max-width: 525px) {
+    font-size: 23px;
+  }
+}
+
+.big__num,
+.symbol {
+  font-size: 1em;
+}
+
+.symbol {
+  margin-left: 4px;
+}
+
+.small__num {
+  font-size: .5em;
+  margin-top: 2px;
+}
+
+.line {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: red;
+
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.text {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  color: #6F7885;
+  text-transform: uppercase;
+
+  @media (max-width: 525px) {
+    font-size: 13px;
+  }
+}
