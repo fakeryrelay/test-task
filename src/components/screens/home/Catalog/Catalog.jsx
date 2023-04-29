@@ -1,23 +1,12 @@
-
-
 import styles from './Catalog.module.scss'
 import { CatalogNavSort } from './CatalogNav/CatalogNavSort'
 import { CatalogShop } from './CatalogShop/CatalogShop';
 import { useEffect, useState } from 'react';
 import { CatalogView } from './CatalogView/CatalogView';
 import { sortByName } from './../../../../utils/catalogSort';
+import { filterBySearch } from './../../../../utils/filterBySearch';
 
-const filterBySearch = (products, searchValue) => {
-  return products.filter(({name, category}) => {
-    const redName = name.toLowerCase()
-    const redCategory = category.toLowerCase()
-    const searchValueRed = searchValue.toLowerCase()
 
-    if (!redName.includes(searchValueRed) && !redCategory.includes(searchValueRed)) return false
-
-    return true
-  })
-}
 
 const setShownItems = (products, amount, page, toBottom) => {
   const items = toBottom ? products : products.reverse()
