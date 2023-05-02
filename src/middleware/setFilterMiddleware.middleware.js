@@ -31,6 +31,9 @@ const deepObjectCheck = (obj1, obj2) => {
 
 export const setFilterMiddleware = storeApi => next => action => {
   next(action)
+
+  // if (action.type === 'RELOAD_FILTER_STATE')
+  
   
   const actualState = storeApi.getState().catalog
   const filterOptions = {

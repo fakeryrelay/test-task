@@ -6,9 +6,9 @@ export const CatalogShopItem = ({product}) => {
   const nameOfLink = product.name.replaceAll('/', '_')
 
   return (
-    <Link to={`/product/${nameOfLink}`} state={{product: product}} className={styles.item}>
+    <Link to={`/product/${nameOfLink}`} state={{product: product}} className={styles.item} draggable={false}>
       <div className={styles.image}>
-        <img src={product.image_url} alt={product.name} width={60} height={40}/>
+        <img src={product.image_url} alt={product.name} width={60} height={40} draggable={false}/>
       </div>
       <div className={styles.name}>
         <div className={styles.title}>{product.name}</div>

@@ -5,8 +5,10 @@ import { Stars } from "../../UI/Stars/Stars"
 import styles from './Product.module.scss'
 import { FaAngleLeft } from "react-icons/fa"
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const Product = () => {
+  const language = useSelector(state => state.view.language)
   const nav = useNavigate()
   const location = useLocation();
   const product = location.state?.product
@@ -15,7 +17,7 @@ export const Product = () => {
     <Layout backgroundColor="#EDF2F8">
       <div className={styles.wrapper}>
         <button className={styles.goBackLink} onClick={() => nav('/')}>
-          <FaAngleLeft /> <span>Назад</span>
+          <FaAngleLeft /> <span>{language === 'ru' ? 'Назад' : 'Back'}</span>
         </button>
 
         <div className={styles.content}>
@@ -24,7 +26,7 @@ export const Product = () => {
             {+product.discount > 0 &&
               <div className={styles.discount}>
                 -{product.discount}%
-                <img src="/images/triangle.svg" alt="" />
+                <img src="/images/triangle.svg" alt="" draggable={false}/>
               </div>
             }
             
@@ -33,7 +35,7 @@ export const Product = () => {
 
           <div className={styles.product}>
             <div className={styles.product__img}>
-              <img src={product.image_url} alt="" />
+              <img src={product.image_url} alt="" draggable={false}/>
             </div>
 
             <div className={styles.info}>

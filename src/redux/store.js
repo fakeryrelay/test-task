@@ -2,7 +2,7 @@ import { catalogReducer } from "./catalog-reducer/catalog-reducer";
 import { loadProducts } from "./catalog";
 import { viewReducer } from './language-reducer/view-reducer';
 import { setFilterMiddleware } from './../middleware/setFilterMiddleware.middleware';
-import { setLanguageMiddleware } from './../middleware/setLanguageMiddleware.middlewate';
+import { setLanguageMiddleware } from './../middleware/setLanguageMiddleware.middleware';
 
 const {
   legacy_createStore: createStore, combineReducers, applyMiddleware
